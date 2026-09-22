@@ -40,17 +40,19 @@ function initFirebase() {
 
 const app = initFirebase();
 const db = getFirestore(app);
+const prefix = process.env.ABACATEPAY_ENV === 'sandbox' ? 'sandbox_' : '';
+const collection = name => db.collection(prefix + name);
 
 // Coleções usadas pela aplicação — centralizadas aqui para evitar strings soltas.
 const collections = {
-  product: db.collection('product'),       // documento único "current"
-  orders: db.collection('orders'),
-  coupons: db.collection('coupons'),
-  events: db.collection('analytics_events'),
-  settings: db.collection('settings'),      // documento único "store"
-  admins: db.collection('admins'),
-  paymentEvents: db.collection('payment_events'),
-  rateLimits: db.collection('rate_limits'),
+  product: collection('product'),       // documento único "current"
+  orders: collection('orders'),
+  coupons: collection('coupons'),
+  events: collection('analytics_events'),
+  settings: collection('settings'),      // documento único "store"
+  admins: collection('admins'),
+  paymentEvents: collection('payment_events'),
+  rateLimits: collection('rate_limits'),
 };
 
 module.exports = { admin, db, collections };

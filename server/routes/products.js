@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
   try {
     const doc = await collections.product.doc(PRODUCT_DOC_ID).get();
     if (!doc.exists) return res.status(404).json({ error: 'Nenhum produto configurado ainda.' });
-    return res.json({ id: doc.id, ...publicProduct(doc.data()), checkoutEnabled: process.env.PAYMENT_PROVIDER === 'abacatepay' });
+    return res.json({ id: doc.id, ...publicProduct(doc.data()), checkoutEnabled: process.env.PAYMENT_PROVIDER === 'abacatepay' && process.env.ABACATEPAY_ENV === 'production', testMode: process.env.ABACATEPAY_ENV === 'sandbox', testCheckoutEnabled: process.env.PAYMENT_PROVIDER === 'abacatepay' && process.env.ABACATEPAY_ENV === 'sandbox' });
   } catch (err) {
     console.error('[GET /api/product]', err.name);
     return res.status(500).json({ error: 'Erro ao carregar o produto.' });

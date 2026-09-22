@@ -4,86 +4,98 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#08110c">
-  <title>Dollar Float Lamp | R$ 119,90</title>
-  <meta name="description" content="Dollar Float Lamp: peça de iluminação com efeito flutuante para transformar seu setup.">
-  <script type="application/ld+json">{"@context":"https://schema.org/","@type":"Product","name":"Dollar Float Lamp","offers":{"@type":"Offer","priceCurrency":"BRL","price":"119.90","availability":"https://schema.org/InStock"}}</script>
+  <title>Dollar Float Lamp — R$ 119,90 com frete grátis</title>
+  <meta name="description" content="Luminária Dollar Float com efeito flutuante e luz verde. R$ 119,90, frete grátis para todo o Brasil e entrega em até 7 dias após o pagamento.">
+  <link rel="canonical" href="https://dollarfloat.vercel.app/">
+  <meta property="og:title" content="Dollar Float Lamp — seu setup em outro nível">
+  <meta property="og:description" content="R$ 119,90. Frete grátis para todo o Brasil. Entrega em até 7 dias após a confirmação do pagamento.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/security.css">
+  <script src="/js/main.js" defer></script>
+  <script src="/js/checkout.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#inicio">Pular para o conteúdo</a>
+  <div class="shipping-bar">Frete grátis para todo o Brasil <span aria-hidden="true">·</span> Entrega em até 7 dias*</div>
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#inicio" aria-label="Dollar Float, início"><span class="brand-mark">$</span><span>Dollar Float</span></a>
-      <span class="secure-header">Compra segura</span>
+      <a class="brand" href="#inicio" aria-label="Dollar Float, início"><span class="brand-mark" aria-hidden="true">$</span><span>Dollar Float</span></a>
+      <a class="header-link" href="#comprar">Ver produto <span aria-hidden="true">↗</span></a>
     </div>
   </header>
   <main id="inicio">
-    <section class="hero">
+    <section class="hero" aria-labelledby="hero-title">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Edição limitada para setups</p>
-          <h1>O detalhe que faz seu setup parar o scroll.</h1>
-          <p class="lead">A Dollar Float Lamp cria um efeito flutuante hipnotizante com luz ambiente verde. Uma peça de presença para sua mesa, quarto ou estúdio.</p>
-          <div class="price-row"><span class="old-price">R$ 199,90</span><strong id="price-display">R$ 119,90</strong><span class="discount">40% OFF</span></div>
-          <a class="btn btn-primary hero-cta" href="#comprar" id="cta-hero">Quero a minha agora <span aria-hidden="true">→</span></a>
-          <div class="trust-line"><span>✓ Pagamento protegido</span><span>✓ Envio rastreado</span><span>✓ Garantia de 6 meses</span></div>
+          <p class="eyebrow">Dollar Float Lamp</p>
+          <h1 id="hero-title">O dólar flutua.<br>Seu setup se destaca.</h1>
+          <p class="lead">Efeito de levitação magnética e luz verde para dar uma nova presença à sua mesa, estante ou quarto. Veja o efeito no vídeo.</p>
+          <div class="price-row"><strong id="price-display">R$ 119,90</strong><span class="price-detail">por unidade<br><b>frete grátis</b></span></div>
+          <a class="btn btn-primary hero-cta" href="#comprar" id="cta-hero">Quero minha Dollar Float <span aria-hidden="true">→</span></a>
+          <div class="trust-line"><span>Pix ou cartão</span><span>Entrega em até 7 dias*</span></div>
         </div>
         <div class="hero-media">
-          <video id="hero-video" class="product-video" src="/media/dollar-float-lamp.mp4" autoplay muted loop playsinline preload="metadata" poster=""></video>
-          <button class="sound-toggle" type="button" aria-label="Ativar som do vídeo">Ativar som</button>
-          <span class="video-label">Veja o efeito em ação</span>
+          <video id="hero-video" class="product-video" src="/media/dollar-float-lamp.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Demonstração da luminária Dollar Float em funcionamento"></video>
+          <div class="video-controls"><button class="video-toggle" type="button" aria-label="Pausar vídeo">Pausar</button><button class="sound-toggle" type="button" aria-label="Ativar som do vídeo" aria-pressed="false">Ativar som</button></div>
+          <span class="video-label">Veja em movimento</span>
         </div>
       </div>
     </section>
-
-    <section class="security-strip" aria-label="Informações de segurança">
+    <section class="security-strip" aria-label="Condições de compra">
       <div class="wrap security-grid">
-        <div class="security-item"><span class="security-icon">&#128274;</span><div><strong>Site protegido</strong><small>Seus dados são tratados com segurança durante a compra.</small></div></div>
-        <div class="security-item"><span class="security-icon">&#10003;</span><div><strong>Compra confiável</strong><small>Você revisa os dados antes de finalizar o pagamento.</small></div></div>
-        <div class="security-item"><span class="security-icon">&#9635;</span><div><strong>Pedido rastreável</strong><small>Receba o código de rastreio após o envio.</small></div></div>
-        <div class="security-item"><span class="security-icon">&#8635;</span><div><strong>Garantia de 6 meses</strong><small>Suporte para defeitos de fabricação.</small></div></div>
+        <div class="security-item"><span class="security-icon" aria-hidden="true">↗</span><div><strong>Frete grátis</strong><small>Para todo o Brasil.</small></div></div>
+        <div class="security-item"><span class="security-icon" aria-hidden="true">7</span><div><strong>Até 7 dias*</strong><small>Após confirmar o pagamento.</small></div></div>
+        <div class="security-item"><span class="security-icon" aria-hidden="true">✓</span><div><strong>Pix ou cartão</strong><small>Pagamento pela AbacatePay.</small></div></div>
+        <div class="security-item"><span class="security-icon" aria-hidden="true">$</span><div><strong>Preço sem surpresa</strong><small>R$ 0,00 de frete no pedido.</small></div></div>
       </div>
     </section>
-
-    <section class="proof-section">
-      <div class="wrap benefit-grid" id="benefit-grid">
-        <article><b>01</b><h2>Fica flutuando</h2><p>Um efeito visual que transforma qualquer canto em cenário.</p></article>
-        <article><b>02</b><h2>Luz de presença</h2><p>Glow verde suave para destacar seu ambiente sem incomodar.</p></article>
-        <article><b>03</b><h2>Pronta para usar</h2><p>Base compacta e alimentação USB: conecte e aproveite.</p></article>
+    <section class="proof-section" aria-label="Conheça a Dollar Float">
+      <div class="wrap benefit-grid">
+        <article><b>01 / EFEITO</b><h2>Flutua de verdade</h2><p>A levitação magnética cria o efeito da peça suspensa sobre a base.</p></article>
+        <article><b>02 / LUZ</b><h2>Um toque de verde</h2><p>Iluminação decorativa que destaca a peça e combina com o seu ambiente.</p></article>
+        <article><b>03 / ESTILO</b><h2>O detalhe do seu espaço</h2><p>Na mesa, no quarto ou na estante: escolha o lugar que merece destaque.</p></article>
       </div>
     </section>
-
-    <section class="buy-section" id="comprar">
+    <section class="buy-section" id="comprar" aria-labelledby="buy-title">
       <div class="wrap checkout-wrap">
         <aside class="checkout-summary">
-          <p class="eyebrow">Oferta de hoje</p>
-          <h2>Dollar Float Lamp</h2>
-          <div class="summary-price"><span>De R$ 199,90</span><strong id="checkout-price">R$ 119,90</strong></div>
-          <p id="checkout-stock" class="stock">Em estoque · envio rápido</p>
-          <ul class="summary-list"><li>✓ Produto com garantia de 6 meses</li><li>✓ Código de rastreio após o envio</li><li>✓ Atendimento caso precise de ajuda</li></ul>
+          <p class="eyebrow">Seu pedido</p>
+          <h2 id="buy-title">Dollar Float Lamp</h2>
+          <p class="summary-quantity">1 unidade</p>
+          <dl class="order-totals"><div><dt>Produto</dt><dd id="item-price">R$ 119,90</dd></div><div><dt>Frete para todo o Brasil</dt><dd class="free-shipping">Grátis</dd></div><div class="order-total"><dt>Total</dt><dd id="checkout-price">R$ 119,90</dd></div></dl>
+          <p id="checkout-stock" class="stock" aria-live="polite">Consultando disponibilidade…</p>
+          <p class="delivery-note">*Entrega em até 7 dias após a confirmação do pagamento.</p>
+          <ol class="purchase-steps"><li><span>1</span>Informe os dados de entrega</li><li><span>2</span>Escolha Pix ou cartão na AbacatePay</li><li><span>3</span>Acompanhe a confirmação do pedido</li></ol>
         </aside>
         <form class="checkout-form" id="checkout-form" novalidate>
-          <div class="form-heading"><h2>Finalizar pedido</h2><p>Preencha seus dados para seguir ao pagamento seguro.</p></div>
-          <div class="form-row"><label for="name">Nome completo</label><input id="name" name="name" autocomplete="name" required placeholder="Seu nome e sobrenome"></div>
-          <div class="form-row"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="voce@email.com"></div>
-          <div class="form-split"><div class="form-row"><label for="phone">WhatsApp</label><input id="phone" name="phone" type="tel" autocomplete="tel" required placeholder="(00) 00000-0000"></div><div class="form-row"><label for="zipCode">CEP</label><input id="zipCode" name="zipCode" inputmode="numeric" autocomplete="postal-code" required placeholder="00000-000"></div></div>
-          <div class="form-row"><label for="address">Endereço completo</label><input id="address" name="address" autocomplete="street-address" required placeholder="Rua, número e complemento"></div>
-          <input id="cpf" name="cpf" type="hidden"><input id="quantity" name="quantity" type="hidden" value="1"><input id="couponCode" name="couponCode" type="hidden">
+          <div class="form-heading"><h2>Onde vamos entregar?</h2><p>Preencha seus dados e continue para o pagamento.</p></div>
+          <p id="store-status" class="store-status" role="status">Verificando disponibilidade para compra…</p>
+          <div class="form-row"><label for="name">Nome completo</label><input id="name" name="name" autocomplete="shipping name" minlength="3" maxlength="120" required placeholder="Nome e sobrenome"></div>
+          <div class="form-row"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="shipping email" maxlength="254" required placeholder="voce@exemplo.com"></div>
+          <div class="form-split"><div class="form-row"><label for="phone">Celular com DDD</label><input id="phone" name="phone" type="tel" autocomplete="shipping tel" maxlength="24" required placeholder="(11) 99999-9999"></div><div class="form-row"><label for="zipCode">CEP</label><input id="zipCode" name="zipCode" inputmode="numeric" autocomplete="shipping postal-code" maxlength="9" required placeholder="00000-000"></div></div>
+          <div class="form-row"><label for="address">Rua, número e complemento</label><input id="address" name="address" autocomplete="shipping street-address" minlength="5" maxlength="120" required placeholder="Rua Exemplo, 123, apto. 10"></div>
+          <div class="form-row"><label for="district">Bairro</label><input id="district" name="district" autocomplete="shipping address-level3" maxlength="60" required placeholder="Seu bairro"></div>
+          <div class="form-split city-row"><div class="form-row"><label for="city">Cidade</label><input id="city" name="city" autocomplete="shipping address-level2" maxlength="60" required placeholder="Sua cidade"></div><div class="form-row"><label for="state">Estado</label><select id="state" name="state" autocomplete="shipping address-level1" required><option value="">UF</option><option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option></select></div></div>
           <p class="form-error" id="form-error" role="alert" aria-live="polite"></p>
-          <button class="btn btn-primary btn-block" id="submit-btn" type="submit" disabled>Ir para o pagamento seguro <span aria-hidden="true">→</span></button>
-          <p class="checkout-note">🔒 Seus dados são enviados de forma segura. Você confere o pagamento antes de concluir.</p>
-          <div class="checkout-security"><strong>Ambiente de compra protegido</strong><span>Seus dados são usados somente para processar e entregar seu pedido.</span></div>
+          <button class="btn btn-primary btn-block" id="submit-btn" type="submit" disabled>Continuar para o pagamento <span aria-hidden="true">→</span></button>
+          <p class="checkout-note">Pix ou cartão na AbacatePay. Você revisa o pagamento antes de concluir.</p>
+          <p class="checkout-terms">Confira as <a href="/termos.html">condições de compra</a> e como tratamos seus dados na <a href="/privacidade.html">política de privacidade</a>.</p>
         </form>
       </div>
     </section>
-
-    <section class="faq-section"><div class="wrap"><p class="eyebrow center">Sem surpresa</p><h2>Perguntas rápidas</h2><div class="faq" id="faq-accordion"><details open><summary>O produto realmente fica flutuando?</summary><p>Sim. O efeito é criado pela levitação magnética quando a peça está posicionada corretamente na base.</p></details><details><summary>Como é enviado?</summary><p>O pedido é embalado com proteção e você recebe o código de rastreio após o envio.</p></details><details><summary>E se eu precisar de suporte?</summary><p>Você conta com garantia de 6 meses contra defeitos de fabricação.</p></details></div></div></section>
+    <section class="faq-section" aria-labelledby="faq-title"><div class="wrap"><p class="eyebrow center">Antes de comprar</p><h2 id="faq-title">Dúvidas rápidas</h2><div class="faq">
+      <details><summary>A peça realmente fica flutuando?</summary><p>Sim. O efeito é criado pela levitação magnética quando a peça está posicionada corretamente sobre a base.</p></details>
+      <details><summary>Quanto custa o frete e quando chega?</summary><p>O frete é grátis para todo o Brasil. O prazo de entrega é de até 7 dias após a confirmação do pagamento.</p></details>
+      <details><summary>Como funciona o pagamento?</summary><p>Depois de informar os dados de entrega, você segue para a página da AbacatePay e escolhe Pix ou cartão. Os dados do cartão são informados nessa página.</p></details>
+      <details><summary>Como sei que o pagamento foi confirmado?</summary><p>Ao voltar para a loja na mesma aba, a página do pedido consulta a confirmação do pagamento. Se ainda estiver aguardando, siga as orientações mostradas na tela.</p></details>
+    </div></div></section>
   </main>
-  <a class="mobile-buy" href="#comprar">Comprar por <strong>R$ 119,90</strong></a>
-  <footer>© <span id="year"></span> Dollar Float. <a href="/privacidade.html">Privacidade</a> · <a href="/termos.html">Termos</a></footer>
-  <script src="/js/main.js"></script><script src="/js/checkout.js"></script>
+  <a class="mobile-buy" href="#comprar"><span>Dollar Float</span><strong>R$ 119,90</strong><span class="mobile-buy-action">Ver pedido →</span></a>
+  <footer><div class="wrap footer-inner"><span>© <span id="year"></span> Dollar Float</span><nav aria-label="Informações da loja"><a href="mailto:transacoesltdsa532@gmail.com">Atendimento</a><a href="/privacidade.html">Privacidade</a><a href="/termos.html">Condições de compra</a></nav></div></footer>
 </body>
 </html>

@@ -21,7 +21,7 @@ async function reserveOrder(input, key) {
     if (!Number.isSafeInteger(unitPriceCents) || unitPriceCents < 100 || unitPriceCents > 10000000) throw problem('Preco indisponivel.');
     if (!Number.isSafeInteger(product.stockAvailable) || product.stockAvailable < input.quantity) throw problem('Estoque insuficiente.');
     const order = { id, fingerprint, customer: { name: input.name, email: input.email, phone: input.phone },
-      shipping: { zipCode: input.zipCode, address: input.address }, quantity: input.quantity,
+      shipping: { zipCode: input.zipCode, address: input.address, costCents: 0, deliveryDays: 7 }, quantity: input.quantity,
       unitPriceCents, totalCents: unitPriceCents * input.quantity, unitPrice: unitPriceCents / 100,
       total: unitPriceCents * input.quantity / 100, status: 'creating', reserved: true,
       provider: process.env.PAYMENT_PROVIDER, devMode: process.env.ABACATEPAY_ENV !== 'production', createdAt: stamp() };

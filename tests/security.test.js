@@ -165,3 +165,14 @@ test('gateway price mismatch blocks payment and releases the reservation', async
   assert.equal((await collections.product.doc('current').get()).data().stockAvailable, 1);
   remotePrice = 11990;
 });
+
+test('hosted sandbox checkout requires an administrator and stays closed to visitors', async () => {
+  process.env.VERCEL = '1';
+  try {
+    const res = await post('/api/checkout', input, { 'Idempotency-Key': crypto.randomUUID() });
+    assert.equal(res.status, 401);
+    const product = await (await request('/api/product')).json();
+    assert.equal(product.checkoutEnabled, false);
+    assert.equal(product.testMode, true);
+  } finally { process.env.VERCEL = ''; }
+});

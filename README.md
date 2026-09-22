@@ -26,7 +26,7 @@ Cadastre o webhook HTTPS `/webhook/payment` com o mesmo secret e eventos `checko
 
 Apos configurar o webhook, use `PAYMENT_PROVIDER=abacatepay` e valide o fluxo completo em sandbox. A confirmacao de pagamento exige secret, assinatura, consulta autenticada da cobranca e transacao no banco. O retorno ao site nao confirma pagamento sozinho. Cupons locais nao sao aceitos nesta oferta.
 
-Nao misture pedidos de sandbox e producao no mesmo banco operacional. Antes das vendas reais, configure ambiente/banco separado, chaves e produto reais, webhook de producao, dominio final, estoque, atendimento e os textos definitivos de termos e privacidade.
+No Firebase, ABACATEPAY_ENV=sandbox usa colecoes com prefixo sandbox_ e preserva o estoque operacional. Execute o seed nesse ambiente antes de testar. Na hospedagem, apenas administradores autenticados podem iniciar compras sandbox; abra /?teste=1 apos entrar no painel. Visitantes ficam com compras bloqueadas. Antes das vendas reais, configure chaves e produto reais, webhook de producao, dominio final, estoque, identificacao do vendedor, atendimento e textos definitivos de termos e privacidade. O frete anunciado e gratis para todo o Brasil, com entrega em ate 7 dias apos confirmar o pagamento.
 
 ## Reconciliacao
 

@@ -28,11 +28,11 @@ async function seed() {
       price: 199.9, pricePromo: 119.9,
       description: 'Luminaria com efeito de levitacao magnetica para decorar seu ambiente.',
       gallery: [], video: '/media/dollar-float-lamp.mp4', benefits: [], specs: [], faq: [],
-      warranty: 'Garantia de 6 meses.', delivery: 'Envio rastreado.',
+      warranty: '', delivery: 'Frete gratis para todo o Brasil. Entrega em ate 7 dias apos a confirmacao do pagamento.',
       stockAvailable: stock, stockSold: 0,
       seo: { title: 'Dollar Float Lamp', metaDescription: 'Luminaria decorativa com efeito flutuante.', slug: 'dollar-float-lamp', ogImage: '' }
     });
-    if (!settings.exists) tx.set(settingsRef, { storeName: 'Dollar Float', logo: '', favicon: '', colors: { primary: '#8ee65d', background: '#08110c' }, whatsapp: '', instagram: '', facebook: '', email: '', phone: '', pixels: {} });
+    if (!settings.exists) tx.set(settingsRef, { storeName: 'Dollar Float', logo: '', favicon: '', colors: { primary: '#8ee65d', background: '#08110c' }, whatsapp: '', instagram: '', facebook: '', email: 'transacoesltdsa532@gmail.com', phone: '', pixels: {} });
   });
   console.log('Cadastro inicial concluido. Dados existentes preservados; credenciais omitidas.');
 }

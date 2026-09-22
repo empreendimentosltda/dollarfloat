@@ -8,7 +8,7 @@
  *
  * Para trocar de gateway:
  *   1. Crie um novo arquivo em server/services/providers/<nome>.js
- *      implementando os mesmos métodos que server/services/providers/stripe.js
+ *      implementando os mesmos métodos que server/services/providers/abacatepay.js
  *   2. Troque PAYMENT_PROVIDER no .env para o nome do novo arquivo
  *      (sem extensão .js)
  *   3. Preencha as credenciais correspondentes no .env
@@ -17,9 +17,8 @@
  * ---------------------------------------------------------------------
  */
 
-const providerName = process.env.PAYMENT_PROVIDER || 'stripe';
+const providerName = process.env.PAYMENT_PROVIDER || 'disabled';
 if (!['disabled', 'abacatepay'].includes(providerName)) throw new Error('Gateway nao permitido. Use abacatepay ou disabled.');
-if (providerName === 'mock' && (process.env.NODE_ENV === 'production' || process.env.VERCEL === '1')) throw new Error('Mock proibido em producao.');
 
 let provider;
 try {

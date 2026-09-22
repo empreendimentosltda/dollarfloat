@@ -8,7 +8,10 @@ const { requireAdmin } = require('../middleware/auth');
 const router = express.Router();
 const statusToken = id => crypto.createHmac('sha256', process.env.JWT_SECRET).update(`order-status:${id}`).digest('hex');
 
-router.post('/', async (req, res) => {
+router.post('/', (req, res, next) => {
+  if (process.env.ABACATEPAY_ENV === 'sandbox' && (process.env.NODE_ENV === 'production' || process.env.VERCEL === '1')) return requireAdmin(req, res, next);
+  next();
+}, async (req, res) => {
   if (process.env.PAYMENT_PROVIDER !== 'abacatepay') return res.status(503).json({ error: 'Vendas ainda nao disponiveis.' });
   const body = req.body || {};
   const { valid, errors } = validateCheckoutInput(body);
@@ -32,13 +35,14 @@ router.post('/', async (req, res) => {
     await collections.orders.doc(order.id).update({ ...session, status: 'pending' });
     return res.json({ checkoutUrl: session.checkoutUrl, orderId: order.id, statusToken: statusToken(order.id) });
   } catch (err) {
+    let retryable = false;
     if (order && err.safeToRelease) {
-      try { await releaseReservation(order.id); } catch { /* Reconcile before releasing stock. */ }
+      try { await releaseReservation(order.id); retryable = true; } catch { /* Reconcile before releasing stock. */ }
     }
     // A timeout can happen after the gateway created the charge. Keep the reservation;
     // never retry charge creation automatically or allow unverified stock release.
     console.error('[checkout]', err.status ? 'ORDER_REJECTED' : 'CHECKOUT_FAILED');
-    return res.status(err.status || 502).json({ error: err.status ? err.message : 'Nao foi possivel abrir o pagamento. Aguarde e entre em contato com a loja se o problema persistir.' });
+    return res.status(err.status || 502).json({ error: err.status ? err.message : 'Não foi possível abrir o pagamento. Aguarde alguns instantes antes de tentar novamente.', retryable });
   }
 });
 
