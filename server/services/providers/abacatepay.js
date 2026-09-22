@@ -64,8 +64,7 @@ async function parseWebhookEvent(event) {
   const payload = event.data?.checkout;
   if (!validId(payload?.id)) throw new Error('INVALID_CHECKOUT');
   // The public HMAC key alone cannot prove origin. Always query our own account.
-  const checkout = await request(`checkouts/get?id=${encodeURIComponent(payload.id)}`);
-  assertMode(checkout);
+  const checkout = await getCheckout(payload.id);
   if (checkout.id !== payload.id || !validId(checkout.externalId)) throw new Error('INVALID_CHECKOUT');
   const type = types[event.event];
   if (type === 'paid' && checkout.status !== 'PAID') throw new Error('PAYMENT_NOT_CONFIRMED');
@@ -77,12 +76,21 @@ async function getCheckout(id) {
   if (!validId(id)) throw new Error('INVALID_CHECKOUT');
   const checkout = await request(`checkouts/get?id=${encodeURIComponent(id)}`);
   assertMode(checkout);
+  if (checkout.id !== id) throw new Error('INVALID_CHECKOUT');
+  // The sandbox can return a stale PENDING result by id while externalId
+  // already reports payment. Both lookups remain authenticated and must match.
+  if (checkout.status === 'PENDING' && validId(checkout.externalId)) {
+    const current = await findCheckout(checkout.externalId);
+    if (current.id !== id || current.externalId !== checkout.externalId || current.amount !== checkout.amount || current.devMode !== checkout.devMode) throw new Error('CHECKOUT_LOOKUP_MISMATCH');
+    return current;
+  }
   return checkout;
 }
 async function findCheckout(orderId) {
   if (!validId(orderId)) throw new Error('INVALID_ORDER');
   const checkout = await request(`checkouts/get?externalId=${encodeURIComponent(orderId)}`);
   assertMode(checkout);
+  if (!validId(checkout.id) || checkout.externalId !== orderId) throw new Error('INVALID_CHECKOUT');
   return checkout;
 }
 module.exports = { createCheckoutSession, verifyWebhookSignature, parseWebhookEvent, getCheckout, findCheckout, PUBLIC_HMAC_KEY };

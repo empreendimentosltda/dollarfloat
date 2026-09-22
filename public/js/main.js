@@ -20,13 +20,13 @@
         if (allowed) status.textContent = 'Compra de teste: não há cobrança real nem envio de produto.';
         else status.textContent = 'Entre no painel administrativo para testar o pagamento.';
       } else {
-        status.textContent = allowed ? 'Frete grátis. Total do pedido: ' + money(price) + '.' : 'Estamos preparando a loja. As compras serão liberadas em breve.';
+        status.textContent = allowed ? 'Frete grátis. Total do pedido: ' + money(price) + '.' : 'Pagamento temporariamente indisponível. Fale com nosso atendimento.';
       }
       const inStock = Number.isSafeInteger(product.stockAvailable) && product.stockAvailable > 0;
       stock.textContent = inStock ? 'Produto disponível em estoque' : 'Produto esgotado no momento';
       window.storeCheckout.available = Boolean(allowed && inStock);
       button.disabled = !window.storeCheckout.available;
-      button.textContent = !inStock ? 'Produto esgotado' : allowed ? 'Continuar para o pagamento →' : 'Vendas em breve';
+      button.textContent = !inStock ? 'Produto esgotado' : 'Continuar para o pagamento →';
       const video = document.getElementById('hero-video');
       if (product.video && new URL(product.video, location.origin).href !== video.src) video.src = product.video;
     } catch {

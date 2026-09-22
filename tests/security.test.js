@@ -23,6 +23,7 @@ const { validProduct, validSettings } = require('../server/utils/catalog');
 const provider = require('../server/services/providers/abacatepay');
 const realFetch = global.fetch;
 const checkouts = new Map();
+const externalOverrides = new Map();
 let server, base, creationCount = 0, remotePrice = 11990;
 global.fetch = async (url, options = {}) => {
   const u = new URL(url);
@@ -34,7 +35,7 @@ global.fetch = async (url, options = {}) => {
     const body = JSON.parse(options.body), id = `bill_${creationCount}`;
     data = { id, externalId: body.externalId, url: `https://app.abacatepay.com/pay/${id}`, amount: 11990 * body.items[0].quantity, paidAmount: null, status: 'PENDING', devMode: true };
     checkouts.set(id, data);
-  } else if (u.pathname.endsWith('/checkouts/get')) data = checkouts.get(u.searchParams.get('id'));
+  } else if (u.pathname.endsWith('/checkouts/get')) data = u.searchParams.has('id') ? checkouts.get(u.searchParams.get('id')) : (externalOverrides.get(u.searchParams.get('externalId')) || [...checkouts.values()].find(c => c.externalId === u.searchParams.get('externalId')));
   else throw new Error('Unexpected endpoint');
   return new Response(JSON.stringify({ data, success: true, error: null }), { status: 200 });
 };
@@ -129,6 +130,23 @@ test('webhook rejects forged signature, wrong secret, wrong environment and unpa
   assert.equal((await signedEvent({ ...event, devMode: false })).status, 401);
   assert.equal((await signedEvent(event)).status, 503);
   assert.equal((await collections.orders.doc(bill.externalId).get()).data().status, 'pending');
+});
+
+test('stale pending lookup is verified by externalId without trusting mismatched payments', async () => {
+  const bill = checkouts.get('bill_1');
+  const event = { id: 'log_lookup', event: 'checkout.completed', apiVersion: 2, devMode: true, data: { checkout: { id: bill.id } } };
+  try {
+    for (const mismatch of [{ id: 'bill_other' }, { externalId: 'other_order' }, { amount: 1 }, { devMode: false }]) {
+      externalOverrides.set(bill.externalId, { ...bill, status: 'PAID', paidAmount: 11990, ...mismatch });
+      await assert.rejects(provider.parseWebhookEvent(event));
+    }
+    externalOverrides.set(bill.externalId, { ...bill, status: 'PAID', paidAmount: 11990 });
+    const verified = await provider.parseWebhookEvent(event);
+    assert.equal(verified.type, 'paid');
+    assert.equal(verified.paidAmountCents, 11990);
+    assert.equal(verified.orderId, bill.externalId);
+    assert.equal(bill.status, 'PENDING');
+  } finally { externalOverrides.clear(); }
 });
 
 test('payment validates amount and handles simultaneous duplicate events exactly once', async () => {
