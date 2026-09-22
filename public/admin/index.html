@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar — Painel Halo Lamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body class="login-body">
+  <div class="login-card">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Halo</span>
+      <span class="brand-suffix">painel</span>
+    </div>
+    <h1 class="login-title">Entrar</h1>
+    <form id="login-form">
+      <div class="form-row">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" required autocomplete="username">
+      </div>
+      <div class="form-row">
+        <label for="password">Senha</label>
+        <input type="password" id="password" required autocomplete="current-password">
+      </div>
+      <p class="form-error" id="login-error" role="alert"></p>
+      <button type="submit" class="btn btn-primary btn-block" id="login-btn">Entrar</button>
+    </form>
+  </div>
+  <script src="/admin/js/admin.js"></script>
+  <script src="/admin/js/login.js"></script>
+</body>
+</html>

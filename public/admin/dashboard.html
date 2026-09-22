@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel — Halo Lamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/admin/css/admin.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Halo</span>
+      <span class="brand-suffix">painel</span>
+    </div>
+    <nav class="sidebar-nav" id="sidebar-nav">
+      <button data-panel="overview" class="active">Visão geral</button>
+      <button data-panel="product">Produto</button>
+      <button data-panel="stock">Estoque</button>
+      <button data-panel="coupons">Cupons</button>
+      <button data-panel="settings">Configurações</button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn btn-ghost btn-block" id="logout-btn">Sair</button>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <!-- ===== VISÃO GERAL ===== -->
+    <section class="panel active" id="panel-overview">
+      <div class="content-header">
+        <div>
+          <h1 class="content-title">Visão geral</h1>
+          <p class="content-sub">Últimos 30 dias</p>
+        </div>
+      </div>
+
+      <div class="metric-grid" id="metric-grid">
+        <div class="metric-card"><p class="metric-label">Visitas</p><p class="metric-value skeleton">&nbsp;</p></div>
+        <div class="metric-card"><p class="metric-label">Visitantes únicos</p><p class="metric-value skeleton">&nbsp;</p></div>
+        <div class="metric-card"><p class="metric-label">Cliques em Comprar</p><p class="metric-value skeleton">&nbsp;</p></div>
+        <div class="metric-card"><p class="metric-label">Checkout iniciado</p><p class="metric-value skeleton">&nbsp;</p></div>
+        <div class="metric-card"><p class="metric-label">Pagamentos aprovados</p><p class="metric-value skeleton">&nbsp;</p></div>
+        <div class="metric-card"><p class="metric-label">Pagamentos recusados</p><p class="metric-value skeleton">&nbsp;</p></div>
+        <div class="metric-card"><p class="metric-label">Taxa de conversão</p><p class="metric-value skeleton">&nbsp;</p></div>
+        <div class="metric-card"><p class="metric-label">Faturamento</p><p class="metric-value skeleton">&nbsp;</p></div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="card">
+          <h3>Visitas e vendas por dia</h3>
+          <canvas id="chart-visits-sales" height="120"></canvas>
+        </div>
+        <div class="card">
+          <h3>Faturamento por dia</h3>
+          <canvas id="chart-revenue" height="120"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="card">
+          <h3>Últimas vendas</h3>
+          <table class="data-table" id="recent-orders-table">
+            <thead><tr><th>Cliente</th><th>Qtd</th><th>Total</th><th>Status</th><th>Data</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>Dispositivos &amp; navegadores</h3>
+          <canvas id="chart-devices" height="140"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRODUTO ===== -->
+    <section class="panel" id="panel-product">
+      <div class="content-header">
+        <div>
+          <h1 class="content-title">Produto</h1>
+          <p class="content-sub">Editando o produto atualmente à venda</p>
+        </div>
+        <button class="btn btn-primary" id="save-product-btn">Salvar alterações</button>
+      </div>
+
+      <div class="section-block">
+        <h3>Informações principais</h3>
+        <div class="form-grid">
+          <div class="form-row"><label>Nome</label><input id="p-name"></div>
+          <div class="form-row"><label>Subtítulo</label><input id="p-subtitle"></div>
+          <div class="form-row"><label>Preço (R$)</label><input id="p-price" type="number" step="0.01"></div>
+          <div class="form-row"><label>Preço promocional (R$)</label><input id="p-price-promo" type="number" step="0.01"></div>
+        </div>
+        <div class="form-row"><label>Descrição</label><textarea id="p-description" rows="4"></textarea></div>
+      </div>
+
+      <div class="section-block">
+        <h3>Galeria (URLs de imagem, uma por linha)</h3>
+        <div class="form-row"><textarea id="p-gallery" rows="4" placeholder="https://.../imagem1.jpg"></textarea></div>
+        <div class="form-row"><label>Vídeo (URL, opcional)</label><input id="p-video"></div>
+      </div>
+
+      <div class="section-block">
+        <h3>Benefícios</h3>
+        <div class="list-editor" id="benefits-editor"></div>
+        <button class="btn btn-ghost" id="add-benefit-btn">+ Adicionar benefício</button>
+      </div>
+
+      <div class="section-block">
+        <h3>Especificações</h3>
+        <div class="list-editor" id="specs-editor"></div>
+        <button class="btn btn-ghost" id="add-spec-btn">+ Adicionar especificação</button>
+      </div>
+
+      <div class="section-block">
+        <h3>Garantia &amp; entrega</h3>
+        <div class="form-row"><label>Texto de garantia</label><textarea id="p-warranty" rows="2"></textarea></div>
+        <div class="form-row"><label>Texto de entrega</label><textarea id="p-delivery" rows="2"></textarea></div>
+      </div>
+
+      <div class="section-block">
+        <h3>FAQ</h3>
+        <div class="list-editor" id="faq-editor"></div>
+        <button class="btn btn-ghost" id="add-faq-btn">+ Adicionar pergunta</button>
+      </div>
+
+      <div class="section-block">
+        <h3>SEO</h3>
+        <div class="form-grid">
+          <div class="form-row"><label>Título (title)</label><input id="p-seo-title"></div>
+          <div class="form-row"><label>Slug</label><input id="p-seo-slug"></div>
+        </div>
+        <div class="form-row"><label>Meta description</label><textarea id="p-seo-desc" rows="2"></textarea></div>
+        <div class="form-row"><label>OG Image (URL)</label><input id="p-seo-og"></div>
+      </div>
+    </section>
+
+    <!-- ===== ESTOQUE ===== -->
+    <section class="panel" id="panel-stock">
+      <div class="content-header">
+        <div>
+          <h1 class="content-title">Estoque</h1>
+          <p class="content-sub">Controle simples de quantidade disponível</p>
+        </div>
+        <button class="btn btn-primary" id="save-stock-btn">Salvar</button>
+      </div>
+      <div class="form-grid">
+        <div class="form-row"><label>Quantidade disponível</label><input id="s-available" type="number"></div>
+        <div class="form-row"><label>Quantidade vendida</label><input id="s-sold" type="number"></div>
+      </div>
+      <p class="content-sub" id="stock-alert"></p>
+    </section>
+
+    <!-- ===== CUPONS ===== -->
+    <section class="panel" id="panel-coupons">
+      <div class="content-header">
+        <div>
+          <h1 class="content-title">Cupons</h1>
+          <p class="content-sub">Crie e gerencie cupons de desconto</p>
+        </div>
+      </div>
+
+      <div class="card section-block">
+        <h3>Novo cupom</h3>
+        <div class="form-grid-3">
+          <div class="form-row"><label>Código</label><input id="c-code" placeholder="EX: HALO10"></div>
+          <div class="form-row">
+            <label>Tipo</label>
+            <select id="c-type"><option value="percent">Percentual (%)</option><option value="fixed">Valor fixo (R$)</option></select>
+          </div>
+          <div class="form-row"><label>Valor</label><input id="c-value" type="number" step="0.01"></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-row"><label>Limite de usos (opcional)</label><input id="c-max-uses" type="number"></div>
+          <div class="form-row"><label>Validade (opcional)</label><input id="c-expires" type="date"></div>
+        </div>
+        <button class="btn btn-primary" id="save-coupon-btn">Criar cupom</button>
+      </div>
+
+      <table class="data-table" id="coupons-table">
+        <thead><tr><th>Código</th><th>Tipo</th><th>Valor</th><th>Usos</th><th>Validade</th><th>Status</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- ===== CONFIGURAÇÕES ===== -->
+    <section class="panel" id="panel-settings">
+      <div class="content-header">
+        <div>
+          <h1 class="content-title">Configurações</h1>
+          <p class="content-sub">Identidade da loja, redes sociais e pixels de rastreamento</p>
+        </div>
+        <button class="btn btn-primary" id="save-settings-btn">Salvar</button>
+      </div>
+
+      <div class="section-block">
+        <h3>Loja</h3>
+        <div class="form-grid">
+          <div class="form-row"><label>Nome da loja</label><input id="set-store-name"></div>
+          <div class="form-row"><label>Cor principal (hex)</label><input id="set-color-primary" type="text" placeholder="#E8A94A"></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-row"><label>Logo (URL)</label><input id="set-logo"></div>
+          <div class="form-row"><label>Favicon (URL)</label><input id="set-favicon"></div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Contato &amp; redes sociais</h3>
+        <div class="form-grid">
+          <div class="form-row"><label>WhatsApp (só números, com DDI)</label><input id="set-whatsapp"></div>
+          <div class="form-row"><label>Instagram (URL)</label><input id="set-instagram"></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-row"><label>E-mail</label><input id="set-email"></div>
+          <div class="form-row"><label>Telefone</label><input id="set-phone"></div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Pixels &amp; analytics</h3>
+        <div class="form-grid">
+          <div class="form-row"><label>Meta Pixel ID</label><input id="set-meta-pixel"></div>
+          <div class="form-row"><label>Google Analytics ID</label><input id="set-ga"></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-row"><label>Google Tag Manager ID</label><input id="set-gtm"></div>
+          <div class="form-row"><label>TikTok Pixel ID</label><input id="set-tiktok"></div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Gateway de pagamento</h3>
+        <p class="content-sub">O gateway ativo é definido pela variável <code>PAYMENT_PROVIDER</code> no arquivo <code>.env</code> do servidor. As chaves de API (Stripe, etc.) também ficam no <code>.env</code> por segurança e não são editáveis por aqui.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="/admin/js/admin.js"></script>
+<script src="/admin/js/dashboard.js"></script>
+</body>
+</html>

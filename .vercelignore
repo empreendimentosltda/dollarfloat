@@ -1,0 +1,10 @@
+.env
+.env.*
+.git
+.local-tools
+server/data
+tests
+CONTINUAR.md
+**/*firebase-adminsdk*.json
+**/*service-account*.json
+*.pem
