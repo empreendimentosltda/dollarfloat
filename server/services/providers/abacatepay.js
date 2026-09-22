@@ -38,7 +38,7 @@ async function createCheckoutSession({ order, successUrl, cancelUrl }) {
   catch (err) { err.safeToRelease = true; throw err; }
   const checkout = await request('checkouts/create', {
     items: [{ id: productId, quantity: order.quantity }],
-    methods: ['PIX', 'CARD'], externalId: order.id,
+    methods: ['PIX'], externalId: order.id,
     returnUrl: cancelUrl, completionUrl: `${successUrl}?orderId=${encodeURIComponent(order.id)}`,
     coupons: [], metadata: { orderId: order.id },
   });

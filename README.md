@@ -35,3 +35,5 @@ No Firebase, ABACATEPAY_ENV=sandbox usa colecoes com prefixo sandbox_ e preserva
 ## Verificacao
 
 `npm test` executa testes isolados, sem pagamentos reais, usando uma API simulada e banco temporario. `npm audit` verifica vulnerabilidades conhecidas nas dependencias. Esses testes nao substituem a verificacao da integracao externa, regras/IAM reais, navegador e hospedagem.
+
+A conta atual permite Pix. O checkout solicita apenas PIX; nao anunciar cartao antes da habilitacao na AbacatePay e da atualizacao do provider.
