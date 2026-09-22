@@ -1,6 +1,9 @@
 const crypto = require('crypto');
 
 const production = process.env.NODE_ENV === 'production' || process.env.VERCEL === '1';
+if (!process.env.APP_URL && process.env.VERCEL === '1' && process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+  process.env.APP_URL = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+}
 process.env.PORT ||= '3000';
 if (production) {
   const secret = process.env.JWT_SECRET || '';

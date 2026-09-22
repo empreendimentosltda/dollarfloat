@@ -10,3 +10,6 @@ server/data/*.log
 CONTINUAR.md
 .local-tools/
 **/*firebase-adminsdk*.json
+
+.vercel
+.env*
